@@ -36,3 +36,40 @@
     transform: rotate(360deg);
   }
 }
+
+form{
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 2% auto;
+  border: black 1px solid;
+  padding: 5%;
+  background-color: rgb(76, 118, 195);
+}
+
+fi
+
+.center{
+  margin:10% auto;
+}
+
+button{
+  margin-top: 10%;
+}
+
+ul{
+  width: fit-content;
+  margin: 5% auto;
+}
+
+
+body{
+  background-image: url(https://images.unsplash.com/photo-1572533376289-35900394c4d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=630&q=80);
+}
+
+div{
+  background-color: cornflowerblue;
+  width: 50%;
+  height: 100vh;
+  margin: auto;
+}

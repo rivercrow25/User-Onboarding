@@ -11,6 +11,7 @@ const SingUp = ({ values, touched, errors, status }) => {
 
     return (
         <div>
+            <h2>Sign up!</h2>
             <Form>
                 <label htmlFor='name'>Name:</label>
                 <Field id='name' type='text' name='name' placeholder='Name Here' />
@@ -31,10 +32,17 @@ const SingUp = ({ values, touched, errors, status }) => {
                 )}
 
                 <label htmlFor="tos">Accept Terms</label>
-                <Field checked={values.tos} type='checkbox' id='tos' name='tos' />
+                <Field className='center' checked={values.tos} type='checkbox' id='tos' name='tos' />
                 {touched.tos && errors.tos && (
                     <p>{errors.tos}</p>
                 )}
+
+                <label htmlFor="role">Role:</label>
+                <Field as='select' id='role' name='role'>
+                    <option value='admin'>Admin</option>
+                    <option value='moderator'>moderator</option>
+                    <option value='user'>User</option>
+                </Field>
 
                 <button type='submit'>Sign up</button>
             </Form>
@@ -42,25 +50,28 @@ const SingUp = ({ values, touched, errors, status }) => {
                 <ul>
                     <li>Name: {item.name}</li>
                     <li>Email: {item.email}</li>
+                    <li>Role: {item.role}</li>
                 </ul>
             ))}
         </div>
     )
 }
 const FormikSignUp = withFormik({
-    mapPRopsToValues({ name, email, password, tos }) {
+    mapPropsToValues({ name, email, password, tos, role }) {
         return {
             name: name || '',
             email: email || '',
             password: password || '',
             tos: tos || false,
+            role: role || '',
         }
     },
     validationSchema: Yup.object().shape({
         name: Yup.string().min(3, 'not long enough').required('name required'),
         password: Yup.string().min(3, 'not long enough').required('password required'),
         email: Yup.string().email('not a valid email').required('Email is required'),
-        tos: Yup.boolean().oneOf([true], 'Must accept Terms Of Aggreements').required('Must accept Terms Of Aggreements')
+        tos: Yup.boolean().oneOf([true], 'Must accept Terms Of Aggreements').required('Must accept Terms Of Aggreements'),
+        role: Yup.string().oneOf(['admin', 'moderator', 'user']).required('Please Choose One')
     }),
     handleSubmit(values, { setStatus, resetForm }) {
         axios.post('https://reqres.in/api/users/', values)
