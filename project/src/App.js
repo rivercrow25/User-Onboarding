@@ -1,11 +1,11 @@
 import React from 'react';
-import logo from './logo.svg';
+import FormikSignUp from './components/signupform'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-
+      <FormikSignUp />
     </div>
   );
 }
